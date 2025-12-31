@@ -11,24 +11,23 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-app.use((req, res, next) => {
-  const start = Date.now();
-  res.on("finish", () => {
-    const duration = Date.now() - start;
-    const method = req.method;
-    const url = req.originalUrl;
-    const status = res.statusCode;
-    const ip = req.ip;
-    console.log(`[${new Date().toISOString()}] ${method} ${url} ${status} ${duration}ms ip=${ip}`);
-  });
-  next();
-});
+// app.use((req, res, next) => {
+//   const start = Date.now();
+//   res.on("finish", () => {
+//     const duration = Date.now() - start;
+//     const method = req.method;
+//     const url = req.originalUrl;
+//     const status = res.statusCode;
+//     const ip = req.ip;
+//     console.log(`[${new Date().toISOString()}] ${method} ${url} ${status} ${duration}ms ip=${ip}`);
+//   });
+//   next();
+// });
 
 connectDB();
 
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (res: Response) => {
   res.json({ message: "Backend Server is running", success: true });
 });
 

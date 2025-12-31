@@ -36,9 +36,5 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.index({ user_handle: 1 }, { unique: true });
-userSchema.index({ email: 1 }, { unique: true });
-
 export type User = InferSchemaType<typeof userSchema>;
-
 export const UserModel = models.User || model("User", userSchema);
