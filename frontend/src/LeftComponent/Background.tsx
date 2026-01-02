@@ -17,7 +17,7 @@ const Background: React.FC = () => {
       </div>
 
       <div className="w-5/12 bg-black">
-        <h1 className="text-amber-50"></h1>
+        
       </div>
     </div>
   );

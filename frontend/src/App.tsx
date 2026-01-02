@@ -1,6 +1,6 @@
 import "./App.css"
 import SignIn from "./components/SignIn"
-import Background from "./Component/Background"
+import Background from "./LeftComponent/Background"
 function App() {
 
   return (

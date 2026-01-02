@@ -1,4 +1,3 @@
-import React from "react";
 
 // Define the shape of a single student object
 interface Student {
