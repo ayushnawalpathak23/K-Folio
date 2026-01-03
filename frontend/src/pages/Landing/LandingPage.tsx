@@ -4,6 +4,7 @@ import Footer from "../../components/Landing Page/Footer";
 import Hero from "../../components/Landing Page/Hero";
 import LandingBackground from "../../components/Landing Page/LandingBackground";
 import Testimonials from "../../components/Landing Page/Testimonials";
+import WhyKfolio from "../../components/Landing Page/whyKfolio";
 
 // LandingPage
 // Orchestrates the landing page layout. Uses an IntersectionObserver to
@@ -42,6 +43,7 @@ export default function LandingPage() {
         <Hero />
         <Features />
         <Testimonials />
+        <WhyKfolio />
       </LandingBackground>
 
       <Footer activeSection={active} />
