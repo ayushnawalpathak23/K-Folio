@@ -8,6 +8,8 @@ export interface IUser extends Document {
   bio?: string;
   createdAt: Date;
   isDeleted?: boolean;
+  followerCount: number;
+  followingCount: number;
 }
 
 const UserSchema: Schema = new Schema<IUser>({
@@ -18,6 +20,8 @@ const UserSchema: Schema = new Schema<IUser>({
   bio: { type: String },
   createdAt: { type: Date, default: Date.now },
   isDeleted: { type: Boolean, default: false },
+   followerCount: {type: Number, default: 0,},
+    followingCount:{type: Number,default: 0,},
 });
 
 export default mongoose.model<IUser>('User', UserSchema);
