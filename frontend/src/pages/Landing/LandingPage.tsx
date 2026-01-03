@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import Features from "../../components/Landing Page/Features";
 import Footer from "../../components/Landing Page/Footer";
 import Hero from "../../components/Landing Page/Hero";
 import LandingBackground from "../../components/Landing Page/LandingBackground";
-import Testimonials from "../../components/Landing Page/Testimonials";
 import WhyKfolio from "../../components/Landing Page/whyKfolio";
 
 // LandingPage
@@ -41,8 +39,6 @@ export default function LandingPage() {
     <>
       <LandingBackground activeSection={active}>
         <Hero />
-        <Features />
-        <Testimonials />
         <WhyKfolio />
       </LandingBackground>
 
