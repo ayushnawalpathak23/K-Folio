@@ -1,7 +1,6 @@
 import "./App.css"
-import SignIn from "./LeftComponent/SignIn"
-import Background from "./LeftComponent/Background"
-function App() {
+import Background from "./pages/Landing/Background"
+
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import LandingPage from "./pages/Landing/LandingPage";
 
@@ -17,7 +16,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signin" element={<Background />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,6 +1,6 @@
 
-import MainContent from "./MainContent";
-
+import MainContent from "../../components/LeftComponent/MainContent";
+import SignIn from "../../components/ui/SignIn.tsx"
 
 const Background: React.FC = () => {
   return (
@@ -17,7 +17,7 @@ const Background: React.FC = () => {
       </div>
 
       <div className="w-5/12 bg-black">
-        
+        <SignIn/>
       </div>
     </div>
   );
