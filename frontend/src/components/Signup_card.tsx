@@ -29,13 +29,13 @@ const SignUpcard: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#0E0E15] ">
-      <div className="relative overflow-hidden w-full max-w-md rounded-2xl bg-[#7F60AD33]/30 p-7 text-white shadow-lg">
+      <div className="relative overflow-hidden w-full max-w-md rounded-2xl bg-[#7F60AD]/20 p-7 text-white shadow-lg">
 
         {/* Shine Border */}
         <ShineBorder shineColor={["#2F5BFF", "white"]} />
 
         {/* Tab Switcher */}
-        <div className="flex mb-6 large p-1 bg-[#111123] text-sm font-medium">
+        <div className="flex mb-6 large p-1 bg-[#2A2D4A] rounded-md text-sm font-medium">
           <button className="flex-1 py-2 rounded-md text-gray-400 text-sm transition hover:-translate-y-px ">
             Log In
           </button>
@@ -65,7 +65,7 @@ const SignUpcard: React.FC = () => {
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               placeholder="John Doe"
-              className="mt-1 w-full rounded-md bg-black/40 border border-white/20 px-3 py-2 outline-none focus:border-[#2F5BFF]"
+              className="mt-1 w-full rounded-md bg-[#2A2D4A] border border-white/20 px-3 py-2 outline-none focus:border-[#2F5BFF]"
             />
           </div>
 
@@ -76,8 +76,8 @@ const SignUpcard: React.FC = () => {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="username"
-              className="mt-1 w-full rounded-md bg-black/40 border border-white/20 px-3 py-2 outline-none focus:border-[#2F5BFF]"
+              placeholder="dummydoe"
+              className="mt-1 w-full rounded-md bg-[#2A2D4A] border border-white/20 px-3 py-2 outline-none focus:border-[#2F5BFF]"
             />
           </div>
 
@@ -89,7 +89,7 @@ const SignUpcard: React.FC = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="example@address.com"
-              className="mt-1 w-full rounded-md bg-black/40 border border-white/20 px-3 py-2 outline-none focus:border-[#2F5BFF]"
+              className="mt-1 w-full rounded-md bg-[#2A2D4A] border border-white/20 px-3 py-2 outline-none focus:border-[#2F5BFF]"
             />
           </div>
 
@@ -102,7 +102,7 @@ const SignUpcard: React.FC = () => {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                 className="mt-1 w-full rounded-md bg-black/40 border border-white/20 px-3 py-2 outline-none focus:border-[#2F5BFF]"
+                 className="mt-1 w-full rounded-md bg-[#2A2D4A] border border-white/20 px-3 py-2 outline-none focus:border-[#2F5BFF]"
                 />
                 <button
                   type="button"
@@ -122,7 +122,7 @@ const SignUpcard: React.FC = () => {
                 type={showPassword ? "text" : "password"}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-               className="mt-1 w-full rounded-md bg-black/40 border border-white/20 px-3 py-2 outline-none focus:border-[#2F5BFF]"
+               className="mt-1 w-full rounded-md bg-[#2A2D4A] border border-white/20 px-3 py-2 outline-none focus:border-[#2F5BFF]"
               />
             </div>
           </div>
