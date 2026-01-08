@@ -19,7 +19,6 @@ const UserSchema: Schema = new Schema<IUser>({
   avatarUrl: { type: String },
   bio: { 
     type: String,
-    maxLength: 150,
 
    },
   createdAt: { type: Date, default: Date.now },

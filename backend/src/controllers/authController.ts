@@ -20,6 +20,7 @@ export const register = async (req: Request, res: Response) => {
     await user.save();
     return res.status(201).json({ message: 'Registration successful' });
   } catch (err) {
+    console.log(err)
     return res.status(500).json({ message: 'Server error' });
   }
 };
