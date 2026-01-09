@@ -29,7 +29,7 @@ export const updateActionSchema = createActionSchema.partial();
 export type CreateActionInput = z.infer<typeof createActionSchema>;
 export type UpdateActionInput = z.infer<typeof updateActionSchema>;
 
-// Full Action document schema (includes timestamps)
+
 export const actionDocumentSchema = createActionSchema.extend({
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
