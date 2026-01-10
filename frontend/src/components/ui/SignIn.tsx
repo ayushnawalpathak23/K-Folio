@@ -10,8 +10,9 @@ const LoginPage: React.FC<SignInProps> = ({ onSwitch }) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!email.trim() || !password.trim()) {
@@ -20,13 +21,41 @@ const LoginPage: React.FC<SignInProps> = ({ onSwitch }) => {
     }
 
     setError("");
-    console.log({ email, password });
+    setLoading(true);
+
+    try {
+      const response = await fetch("http://localhost:5000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+
+      localStorage.setItem("token", data.token);
+      
+      console.log("Logged in successfully, token:", data.token);
+      alert("Login Successful!"); 
+
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="relative min-h-screen w-full bg-black flex items-center">
 
-      {/* LOGIN CARD */}
       <div className="relative z-10 w-95 ml-20 rounded-2xl bg-[#524C90]/30 backdrop-blur-xl p-8 text-white">
         <ShineBorder shineColor={["#2F5BFF", "white"]} />
 
@@ -52,12 +81,12 @@ const LoginPage: React.FC<SignInProps> = ({ onSwitch }) => {
           )}
 
           <div>
-            <label className="text-sm text-gray-300">Username or Email</label>
+            <label className="text-sm text-gray-300">Email Address</label>
             <input
-              type="text"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder=""
+              placeholder="example@address.com"
               className="mt-1 w-full rounded-md bg-black/40 border border-white/20 px-3 py-2 outline-none focus:border-[#2F5BFF]"
             />
           </div>
@@ -90,13 +119,13 @@ const LoginPage: React.FC<SignInProps> = ({ onSwitch }) => {
 
           <button
             type="submit"
-            className="w-full mt-2 bg-[#2F5BFF] transition cursor-pointer hover:-translate-y-px rounded-md py-2 font-medium"
+            disabled={loading}
+            className="w-full mt-2 bg-[#2F5BFF] transition cursor-pointer hover:-translate-y-px rounded-md py-2 font-medium disabled:opacity-50"
           >
-            Log In
+            {loading ? "Logging in..." : "Log In"}
           </button>
         </form>
         <div className="mt-6 flex items-center gap-3">
-          {/* Left line */}
           <div className="flex-1">
             <svg
               className="w-full"
@@ -116,12 +145,10 @@ const LoginPage: React.FC<SignInProps> = ({ onSwitch }) => {
             </svg>
           </div>
 
-          {/* Text */}
           <span className="text-sm text-gray-400 whitespace-nowrap">
             Or continue with
           </span>
 
-          {/* Right line */}
           <div className="flex-1">
             <svg
               className="w-full"
@@ -143,9 +170,7 @@ const LoginPage: React.FC<SignInProps> = ({ onSwitch }) => {
         </div>
 
 
-        {/* SOCIAL BUTTONS */}
         <div className="mt-4 flex gap-3">
-          {/* GOOGLE */}
           <button className="flex flex-1 items-center justify-center gap-2 rounded-md bg-black/40 border border-white/20 py-2 text-sm transition hover:-translate-y-px hover:border-[#2F5BFF] hover:shadow-[0_0_16px_rgba(47,91,255,0.5)]">
             <svg
               width="14"
@@ -162,7 +187,6 @@ const LoginPage: React.FC<SignInProps> = ({ onSwitch }) => {
             <span>Google</span>
           </button>
 
-          {/* FACEBOOK */}
           <button className="flex flex-1 items-center justify-center gap-2 rounded-md bg-black/40 border border-white/20 py-2 text-sm transition hover:-translate-y-px hover:border-[#2F5BFF] hover:shadow-[0_0_16px_rgba(47,91,255,0.5)]">
             <svg
               width="14"

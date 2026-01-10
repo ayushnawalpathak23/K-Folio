@@ -5,7 +5,7 @@ type SignInProps = {
   onSwitch: () => void;
 };
 
-const SignUpCard:  React.FC<SignInProps> = ({ onSwitch })  => {
+const SignUpCard: React.FC<SignInProps> = ({ onSwitch }) => {
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -13,8 +13,9 @@ const SignUpCard:  React.FC<SignInProps> = ({ onSwitch })  => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!fullName || !username || !email || !password || !confirmPassword) {
@@ -28,23 +29,42 @@ const SignUpCard:  React.FC<SignInProps> = ({ onSwitch })  => {
     }
 
     setError("");
-    console.log({
-      fullName,
-      username,
-      email,
-      password,
-      confirmPassword,
-    });
+    setLoading(true);
+
+    try {
+      const response = await fetch("http://localhost:5000/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Registration failed");
+      }
+
+      alert("Account created successfully! Please log in.");
+      onSwitch();
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="relative min-h-screen w-full bg-black flex items-center">
       <div className="relative z-10 w-95 ml-20 rounded-2xl bg-[#524C90]/30 backdrop-blur-xl p-8 text-white">
         
-        {/* Shine Border */}
         <ShineBorder shineColor={["#2F5BFF", "white"]} />
 
-        {/* Tabs */}
         <div className="mb-6 flex p-1 bg-[#11101E] rounded-md text-xs font-medium">
           <button className="flex-1 py-2 rounded-md text-sm text-gray-400 transition hover:-translate-y-px" onClick={onSwitch}>
             Log In
@@ -54,13 +74,11 @@ const SignUpCard:  React.FC<SignInProps> = ({ onSwitch })  => {
           </button>
         </div>
 
-        {/* Header */}
         <h2 className="text-2xl font-semibold">Create Your Account</h2>
         <p className="mt-1 text-sm text-gray-400">
           Join the community and start sharing today.
         </p>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           {error && (
             <div className="rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-400">
@@ -68,7 +86,6 @@ const SignUpCard:  React.FC<SignInProps> = ({ onSwitch })  => {
             </div>
           )}
 
-          {/* Full Name */}
           <div>
             <label className="text-sm text-gray-300">Full Name</label>
             <input
@@ -80,7 +97,6 @@ const SignUpCard:  React.FC<SignInProps> = ({ onSwitch })  => {
             />
           </div>
 
-          {/* Username */}
           <div>
             <label className="text-sm text-gray-300">Username</label>
             <input
@@ -92,7 +108,6 @@ const SignUpCard:  React.FC<SignInProps> = ({ onSwitch })  => {
             />
           </div>
 
-          {/* Email */}
           <div>
             <label className="text-sm text-gray-300">Email ID</label>
             <input
@@ -104,7 +119,6 @@ const SignUpCard:  React.FC<SignInProps> = ({ onSwitch })  => {
             />
           </div>
 
-          {/* Passwords */}
           <div className="flex gap-3">
             <div className="flex-1">
               <label className="text-sm text-gray-300">Password</label>
@@ -136,7 +150,6 @@ const SignUpCard:  React.FC<SignInProps> = ({ onSwitch })  => {
             </div>
           </div>
 
-          {/* Terms */}
           <div className="flex items-center text-[11px] text-[#A1A1B3]">
             <input type="checkbox" className="mr-2" />
             By signing up, you agree to our
@@ -145,12 +158,12 @@ const SignUpCard:  React.FC<SignInProps> = ({ onSwitch })  => {
             </span>
           </div>
 
-          {/* Submit */}
           <button
             type="submit"
-            className="mt-2 w-full rounded-md bg-[#2F5BFF] py-2 font-medium transition hover:-translate-y-px"
+            disabled={loading}
+            className="mt-2 w-full rounded-md bg-[#2F5BFF] py-2 font-medium transition hover:-translate-y-px disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Create Account
+            {loading ? "Creating Account..." : "Create Account"}
           </button>
         </form>
       </div>
