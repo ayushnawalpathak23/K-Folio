@@ -122,7 +122,7 @@ export default function CreatePostModal({ onClose }: CreatePostModalProps) {
         <h2 className="mb-4 text-center text-xl font-semibold text-[#7582B5] shrink-0">
           Create new post
         </h2>
-cd 
+
         {/* Visibility */}
         <div className="mb-3 text-sm text-white/80 shrink-0">
           <p className="mb-2 font-medium">Who can see this post?</p>
