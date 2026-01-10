@@ -1,8 +1,7 @@
 import { Router } from "express";
-import { createPost } from "../controllers/postController";
+import { createPost, updatePost } from "../controllers/postController";
 import { authMiddleware } from "../middleware/auth";
-import {handleLike} from "../controllers/actionController";
-import {handleComment} from "../controllers/actionController";
+import { handleLike,handleComment } from "../controllers/actionController";
 
 const router = Router();
 
@@ -10,7 +9,7 @@ const router = Router();
 router.post("/create", authMiddleware, createPost);
 
 // UPDATE POST
-//router.put("/update/:postId", authMiddleware, updatePost);
+router.put("/update/:postId", authMiddleware, updatePost);
 
 router.post('/:postId/like',authMiddleware,handleLike);
 router.post('/:postId/comment',authMiddleware,handleComment)
